@@ -5,10 +5,11 @@ namespace AP1_AP_Oly.DAL
 {
     public class Contexto : DbContext
     {
-        public DbSet<Registros> Registros { get; set; }
+        public DbSet<Aportes> Aportes { get; set; }
 
         public Contexto(DbContextOptions<Contexto> options) : base(options)
         {
         }
     }
 }
+

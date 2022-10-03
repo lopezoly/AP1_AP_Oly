@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components.Web;
 using AP1_AP_Oly.Data;
 using AP1_AP_Oly.DAL;
 using Microsoft.EntityFrameworkCore;
+using AP1_AP_Oly.BLL;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,8 @@ builder.Services.AddDbContext<Contexto>(options =>
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
+
+builder.Services.AddScoped<AportesBLL>();
 
 var app = builder.Build();
 
