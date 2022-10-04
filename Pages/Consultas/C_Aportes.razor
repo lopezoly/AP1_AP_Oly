@@ -1,5 +1,60 @@
-﻿<h3>C_Aportes</h3>
+﻿@page "/C_Aportes"
+@inject AportesBLL AportesBLL
+
+<EditForm Model="lista">
+    <div class="card">
+        <div class="card-header">
+            <h3>Consultas de Aportres</h3>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+        </div>
+    </div>
+    <div class="card-body">
+        <form>
+            <span class="input-group-text">Desde</span>
+            <input type="date" @bind-value="aportes.Fecha" />
+            <span class="input-group-text">Hasta</span>
+            <input type="date" @bind-value="aportes.Fecha" />
+            <div class="input-group d-flex align-items-end">
+                <button type="button" class="btn btn-dark bi bi-binoculars" @onclick="Buscar"> Buscar</button>
+            </div>
+        </form>
+        <table class="table table-primary">
+            <thead class="thead-blue">
+                <tr class="table-info">
+                    <th>AportesId</th>
+                    <th>Persona</th>
+                    <th>Monto</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in lista)
+                {
+                    <tr>
+                        <td>@item.AportesId</td>
+                        <td>@item.Persona</td>
+                        <td>@item.Monto</td>
+                        <td><a href="R_Aportes/@item.AportesId">View</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <label>Conteo: @conteo</label>
+        
+    </div>
+    
+</EditForm>
 
 @code {
 
+    [Parameter]
+    public Aportes aportes { get; set; } = new Aportes();
+    public List<Aportes> lista { get; set; } = new List<Aportes>();
+    int conteo = 0;
+    int total = 0;
+    public void Buscar()
+    {
+        lista = AportesBLL.GetList(o => true);
+        conteo = lista.Count();
+    }
 }
